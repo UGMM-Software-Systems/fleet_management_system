@@ -1,6 +1,9 @@
 name: Build Windows executable
 
 on:
+  push:
+    tags:
+      - "windows-v*"
   workflow_dispatch:
     inputs:
       release_tag:
@@ -46,8 +49,9 @@ jobs:
       - name: Publish release asset
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ inputs.release_tag || github.ref_name }}
         shell: pwsh
         run: |
-          gh release create "${{ inputs.release_tag }}" "dist/SamXpress-Fleet.exe" `
+          gh release create "$env:RELEASE_TAG" "dist/SamXpress-Fleet.exe" `
             --title "SamXpress Fleet Windows" `
             --generate-notes
