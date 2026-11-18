@@ -1,5 +1,7 @@
 import json
 import os
+import shutil
+import sys
 from datetime import date, datetime
 from functools import wraps
 from uuid import uuid4
@@ -9,7 +11,15 @@ from flask import Flask, flash, redirect, render_template, request, session, url
 
 app = Flask(__name__)
 app.secret_key = "samxpress-development-secret"
-DATA_FILE = os.path.join(os.path.dirname(__file__), "data.json")
+SOURCE_DIR = os.path.dirname(__file__)
+APP_DIR = os.path.dirname(sys.executable) if getattr(sys, "frozen", False) else SOURCE_DIR
+DATA_FILE = os.path.join(APP_DIR, "data.json")
+
+if getattr(sys, "frozen", False) and not os.path.exists(DATA_FILE):
+    bundled_data_file = os.path.join(getattr(sys, "_MEIPASS", SOURCE_DIR), "data.json")
+    if os.path.exists(bundled_data_file):
+        shutil.copyfile(bundled_data_file, DATA_FILE)
+
 STATUSES = ["Requested", "Allocated", "Collected", "In transit", "Delivered"]
 
 
@@ -146,4 +156,4 @@ def delete_delivery(delivery_id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="127.0.0.1", port=5000, debug=False, use_reloader=False)
