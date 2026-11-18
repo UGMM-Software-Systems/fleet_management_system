@@ -2,6 +2,9 @@ import json
 import os
 import shutil
 import sys
+import threading
+import time
+import webbrowser
 from datetime import date, datetime
 from functools import wraps
 from uuid import uuid4
@@ -156,4 +159,10 @@ def delete_delivery(delivery_id):
 
 
 if __name__ == "__main__":
+    if getattr(sys, "frozen", False):
+        def open_browser():
+            time.sleep(1)
+            webbrowser.open("http://127.0.0.1:5000")
+
+        threading.Thread(target=open_browser, daemon=True).start()
     app.run(host="127.0.0.1", port=5000, debug=False, use_reloader=False)

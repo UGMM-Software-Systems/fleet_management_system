@@ -34,7 +34,7 @@ jobs:
 
       - name: Build executable
         run: |
-          python -m PyInstaller --noconfirm --clean --onefile --name SamXpress-Fleet `
+          python -m PyInstaller --noconfirm --clean --onefile --noconsole --name SamXpress-Fleet `
             --add-data "templates;templates" `
             --add-data "static;static" `
             --add-data "data.json;." `

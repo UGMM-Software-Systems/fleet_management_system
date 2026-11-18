@@ -15,4 +15,4 @@ Open http://127.0.0.1:5000. Demo sign-in: `dispatch` / `samxpress123`.
 
 ## Windows executable
 
-Run `SamXpress-Fleet.exe` directly on Windows. The app starts at http://127.0.0.1:5000.
+Double-click `SamXpress-Fleet.exe` on Windows. It opens the app automatically in your default browser at http://127.0.0.1:5000 and shows no command prompt window.
