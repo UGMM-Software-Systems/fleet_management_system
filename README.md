@@ -12,3 +12,7 @@ python app.py
 ```
 
 Open http://127.0.0.1:5000. Demo sign-in: `dispatch` / `samxpress123`.
+
+## Windows executable
+
+Run `SamXpress-Fleet.exe` directly on Windows. The app starts at http://127.0.0.1:5000.
